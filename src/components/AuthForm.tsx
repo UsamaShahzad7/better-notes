@@ -86,7 +86,7 @@ function AuthForm({ type }: Props) {
                 ) : isLogin ? (
                   "Login"
                 ) : (
-                  "SignUp"
+                  "Sign Up"
                 )}
               </Button>
               <div className="text-xs">
@@ -94,7 +94,7 @@ function AuthForm({ type }: Props) {
                   ? "Don't have an account?"
                   : "Already have an account?"}{" "}
                 <Link
-                  href={isLogin ? "/signup" : "/login"}
+                  href={isLogin ? "/sign-up" : "/login"}
                   className={`text-blue-200 ${isLogin ? "pointer-event-none opacity-50" : ""}`}
                 >
                   {isLogin ? "Sign Up" : "Login"}
