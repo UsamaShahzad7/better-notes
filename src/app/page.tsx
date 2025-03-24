@@ -1,6 +1,6 @@
 export default function HomePage() {
   return (
-    <div className="h-6 bg-red-400">
+    <div className="">
       Welcome
     </div>
   );
