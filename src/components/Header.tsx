@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { ThemeToggleButton } from "./ThemeToggleButton";
 
 function Header() {
   const user = null
@@ -19,12 +20,17 @@ function Header() {
           Better<span>Notes</span>
         </div>
       </Link>
-      <div>
-        { user ? ('Logout'): (<>
-        <Button asChild variant="outline">
-          <Link href={'/login'}>Login</Link>
-        </Button>
-        </>) }
+      <div className="flex gap-4">
+        {user ? ('Logout') : (<>
+          <Button asChild>
+            <Link href={'/login'}>Login</Link>
+          </Button>
+
+          <Button asChild variant="outline">
+            <Link href={'/login'}>Signup</Link>
+          </Button>
+        </>)}
+        <ThemeToggleButton />
       </div>
     </header>
   )
