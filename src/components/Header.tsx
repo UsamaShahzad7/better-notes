@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { ThemeToggleButton } from "./ThemeToggleButton";
+import LogoutButton from "./LogoutButton";
 
 function Header() {
   const user = null
@@ -21,7 +22,7 @@ function Header() {
         </div>
       </Link>
       <div className="flex gap-4">
-        {user ? ('Logout') : (<>
+        {user ? (<LogoutButton/>) : (<>
           <Button asChild>
             <Link href={'/login'}>Login</Link>
           </Button>
