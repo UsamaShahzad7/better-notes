@@ -24,7 +24,6 @@ model Note {
 
 model User{
   id      String @id @default(uuid())
-  name    String
   notes   Note[]
   email   String @unique
   createdAt DateTime @default(now())
