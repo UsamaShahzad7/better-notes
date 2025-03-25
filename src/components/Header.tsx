@@ -3,9 +3,10 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 import LogoutButton from "./LogoutButton";
+import { getUser } from "@/utils/supabase/server";
 
-function Header() {
-  const user = null
+async function Header() {
+  const user = await getUser()
   return (
     <header className="bg-popover flex w-full h-24 items-center justify-between px-10 shadow-lg shadow-red-500/50">
       <Link href={'/'} className="flex items-end gap-4">
@@ -28,7 +29,7 @@ function Header() {
           </Button>
 
           <Button asChild variant="outline">
-            <Link href={'/login'}>Signup</Link>
+            <Link href={'/sign-up'}>Signup</Link>
           </Button>
         </>)}
         <ThemeToggleButton />

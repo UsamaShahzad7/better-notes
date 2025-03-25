@@ -4,9 +4,11 @@ import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
+import { loginAction, signUpAction } from "@/app/actions/user";
 
 type Props = {
   type: "login" | "register";
@@ -15,10 +17,38 @@ type Props = {
 function AuthForm({ type }: Props) {
   const isLogin = type === "login";
   const router = useRouter();
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (formData: { email?: string; password?: string }) => {
-    console.log("Form Submitted");
+  const handleSubmit = (formData: { email: string; password: string }) => {
+    startTransition(async ()=>{
+      const email = formData.email
+      const password = formData.password
+
+      let errorMessage;
+      let title;
+      let description;
+
+      if(isLogin){
+        errorMessage = (await loginAction(email, password)).errorMessage
+        title = "Logged In"
+        description = "Logged In Successfully"
+      }else{
+        errorMessage = (await signUpAction(email, password)).errorMessage
+        title = "Signed Up"
+        description = "Signed Up Successfully"
+      }
+
+      if(!errorMessage){
+        toast.error( title, {
+          description
+        })
+        router.replace('/')
+      }else{
+        toast.success( 'Error', {
+          description: errorMessage
+        })
+      }
+    })
   };
 
   return (
