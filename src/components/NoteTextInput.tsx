@@ -5,6 +5,8 @@ import { Textarea } from "./ui/textarea";
 import { ChangeEvent, useEffect } from "react";
 import { Label } from "./ui/label";
 import { debuounceTimeout } from "@/lib/constant";
+import { updateNoteAction } from "@/app/actions/note";
+import { useNoteStore } from "@/providers/NoteStore";
 
 let updateTimeOut: NodeJS.Timeout | null = null;
 type Props = {
@@ -14,7 +16,8 @@ type Props = {
 export default function NoteTextInput({ noteId, startingNoteText }: Props) {
   const noteIdParam = useSearchParams().get("noteId");
 
-  const { noteText, setNoteText } = useNote();
+  const noteText = useNoteStore((state) => state.content)
+  const setNoteText = useNoteStore((state) => state.setNoteContent)
 
   useEffect(() => {
     if (noteIdParam === noteId) {
@@ -40,7 +43,7 @@ export default function NoteTextInput({ noteId, startingNoteText }: Props) {
         onChange={(e) => handleNoteUpdate(e)}
         placeholder="Write your note here"
         id="message-2"
-        className="custom-scrollbar placeholder:text-muted-foreground mb-4 resize-none focus:ring-0 focus-visible:border-b-2 focus-visible:border-blue-500 focus-visible:ring-0 focus-visible:outline-none"
+        className="custom-scrollbar h-full placeholder:text-muted-foreground mb-4 resize-none focus:ring-0 focus-visible:border-b-2 focus-visible:border-red-500/50 focus-visible:ring-0 focus-visible:outline-none"
       ></Textarea>
       <p className="text-muted-foreground text-sm">
         Your message will be copied to the support team.
