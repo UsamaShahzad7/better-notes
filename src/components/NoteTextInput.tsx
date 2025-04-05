@@ -46,7 +46,7 @@ export default function NoteTextInput({ noteId, startingNoteText }: Props) {
         className="custom-scrollbar h-full placeholder:text-muted-foreground mb-4 resize-none focus:ring-0 focus-visible:border-b-2 focus-visible:border-red-500/50 focus-visible:ring-0 focus-visible:outline-none"
       ></Textarea>
       <p className="text-muted-foreground text-sm">
-        Your message will be copied to the support team.
+        Write your thoughts
       </p>
     </div>
   );

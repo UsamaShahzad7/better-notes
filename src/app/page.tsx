@@ -25,7 +25,6 @@ export default async function HomePage({searchParams}: Props) {
       })
     : null;
 
-
   return (
     <div className="flex flex-col h-full items-center gap-4">
       <div className="flex w-full max-w-4xl justify-end gap-2">

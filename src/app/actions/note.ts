@@ -10,19 +10,41 @@ export const updateNoteAction = async (
 ) => {
   try {
     const user = await getUser();
-    console.log("noteId", noteId);
-    console.log("noteText", noteText);
     if (!user) {
       throw new Error("You must be logged in");
     }
-
+    let error;
     if (noteId) {
-      await prisma.note.update({
+      error = await prisma.note.update({
         where: {
           id: noteId,
         },
         data: {
           content: noteText,
+        },
+      });
+    }
+
+    return { errorMessage: null };
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const createNoteAction = async (noteId: string) => {
+  try {
+    const user = await getUser();
+
+    if (!user) {
+      throw new Error("You must be logged in");
+    }
+
+    if (noteId) {
+      await prisma.note.create({
+        data: {
+          id: noteId,
+          content: "",
+          authorId: user?.id,
         },
       });
     }

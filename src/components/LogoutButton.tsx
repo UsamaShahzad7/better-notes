@@ -17,7 +17,6 @@ function LogoutButton() {
 
     const { errorMessage } = await logOutAction();
 
-    console.log("err", errorMessage)
     if (!errorMessage) {
       toast.success("Logged Out", {
         description: "You've been logged out successfully",
