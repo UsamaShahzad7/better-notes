@@ -8,6 +8,7 @@ type State = {
 
 type Action = {
   setNoteContent: (firstName: State['content']) => void
+  setSelectNote: (id: State['id']) => void
 }
 
 // Create your store, which includes both state and (optionally) actions
@@ -16,6 +17,7 @@ export const useNoteStore = create<State & Action>((set) => ({
   content: '',
   authorId: '',
   setNoteContent: (content) => set(() => ({ content: content })),
+  setSelectNote: (id) => set(() => ({ id: id })),
 }))
 
 // // In consuming app

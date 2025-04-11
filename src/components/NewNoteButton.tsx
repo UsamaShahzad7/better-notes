@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
 import { createNoteAction } from "@/app/actions/note";
+import { useNoteStore } from "@/providers/NoteStore";
 
 type Props = {
   user: User | null;
@@ -17,6 +18,8 @@ export default function NewNoteButton({ user }: Props) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const setSelectedNote = useNoteStore((state) => state.setSelectNote)
+
   const handleNewNoteButtonClick = async () => {
     if (!user) {
       router.push("/login");
@@ -24,6 +27,7 @@ export default function NewNoteButton({ user }: Props) {
     setLoading(true);
     const uuid = uuidv4();
     const data = await createNoteAction(uuid);
+    setSelectedNote(uuid)
     router.push(`/?noteId=${uuid}`);
     if (data.errorMessage) {
       toast.error(data.errorMessage);

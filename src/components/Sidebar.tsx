@@ -1,27 +1,22 @@
-import { Calendar, Home, Inbox, NotebookTabsIcon, Search, Settings } from "lucide-react"
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { getUser } from "@/utils/supabase/server"
-import { Note } from "@prisma/client"
-import { prisma } from "@/db/prisma"
-import Link from "next/link"
-import SidebarGroupContent from "./SidebarGroupContent"
+} from "@/components/ui/sidebar";
+import { getUser } from "@/utils/supabase/server";
+import { Note } from "@prisma/client";
+import { prisma } from "@/db/prisma";
+import Link from "next/link";
+import SidebarGroupContent from "./SidebarGroupContent";
 
 async function AppSidebar() {
-
-  const user = await getUser()
+  const user = await getUser();
 
   let notes: Note[] = [];
 
-  if(user){
+  if (user) {
     notes = await prisma.note.findMany({
       where: {
         authorId: user?.id,
@@ -52,4 +47,4 @@ async function AppSidebar() {
   );
 }
 
-export default AppSidebar
+export default AppSidebar;
